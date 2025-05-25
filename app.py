@@ -34,12 +34,8 @@ def predict():
         # Make prediction
         prediction = model.predict(scaled_features)
 
-        # Convert NumPy scalar to native Python type for JSON serialization
-        recommended_crop = prediction[0]
-        if isinstance(recommended_crop, np.generic):
-            recommended_crop = recommended_crop.item()
-
-        return jsonify({"recommended_crop": recommended_crop})
+        # Convert to native Python string for JSON response
+        return jsonify({"recommended_crop": str(prediction[0])})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
