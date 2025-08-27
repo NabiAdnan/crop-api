@@ -14,6 +14,11 @@ scaler = joblib.load("scaler.pkl")
 def home():
     return "Crop Recommendation API is running!"
 
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "healthy", "message": "API is running"}), 200
+
+
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
